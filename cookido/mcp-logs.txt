@@ -1,0 +1,12 @@
+{"level":30,"time":"2026-02-07T23:33:07.109Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Starting WhatsApp MCP Server..."}
+{"level":30,"time":"2026-02-07T23:33:07.109Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Initializing database..."}
+{"level":30,"time":"2026-02-07T23:33:07.110Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Database initialized successfully."}
+{"level":30,"time":"2026-02-07T23:33:07.110Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Attempting to connect to WhatsApp..."}
+{"level":30,"time":"2026-02-07T23:33:07.198Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"WhatsApp connection process initiated."}
+{"level":30,"time":"2026-02-07T23:33:07.198Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Starting MCP server..."}
+{"level":30,"time":"2026-02-07T23:33:07.198Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Initializing MCP server..."}
+{"level":30,"time":"2026-02-07T23:33:07.199Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"MCP server configured. Connecting stdio transport..."}
+{"level":30,"time":"2026-02-07T23:33:07.199Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"MCP transport connected. Server is ready and listening via stdio."}
+{"level":30,"time":"2026-02-07T23:33:07.199Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"MCP Server setup complete. Waiting for requests from client..."}
+{"level":30,"time":"2026-02-07T23:33:07.199Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"MCP Server started and listening."}
+{"level":30,"time":"2026-02-07T23:33:07.199Z","pid":30323,"hostname":"Anibals-MacBook-Pro-M1","msg":"Application setup complete. Running..."}
