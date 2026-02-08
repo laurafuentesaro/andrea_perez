@@ -64,7 +64,7 @@ export const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
 
       {/* Instructions toggle */}
       <button
-        onClick={() => setShowSteps(!showSteps)}
+        onClick={(e) => { e.stopPropagation(); setShowSteps(!showSteps); }}
         className="flex items-center gap-1 text-xs font-medium text-theme-accent hover:text-theme-accent-hover transition-colors"
       >
         <ChevronDown
