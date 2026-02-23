@@ -43,6 +43,7 @@ export const CATEGORY_INFO: Record<IngredientCategory, CategoryInfo> = {
 const NAME_NORMALIZATIONS: Record<string, string> = {
   'Huevo': 'Huevos',
   'Aceite de oliva virgen extra': 'Aceite de oliva',
+  'Palta madura': 'Palta',
   'Zumo de limon': 'Limon',
   'Pechuga de pollo sin piel': 'Pechuga de pollo',
   'Pollo o tofu': 'Pechuga de pollo',
@@ -50,10 +51,18 @@ const NAME_NORMALIZATIONS: Record<string, string> = {
   'Calabacines': 'Zucchini',
   'Tomates': 'Tomate',
   'Zanahorias': 'Zanahoria',
-  'Cebolla roja': 'Cebolla morada',
+  'Cebolla roja': 'Cebolla colorada',
+  'Cebolla morada': 'Cebolla colorada',
   'Oregano seco': 'Oregano',
   'Comino molido': 'Comino',
   'Cacao extra para rebozar': 'Cacao amargo en polvo',
+  'Coco rallado extra para rebozar': 'Coco rallado',
+  'Boniato cocido': 'Boniato',
+  'Lentejas cocidas': 'Lentejas',
+  'Morron rojo': 'Morrón rojo',
+  'Morron verde': 'Morrón verde',
+  'Champinones': 'Champiñones',
+  'Pizca de sal': 'Sal',
 };
 
 export function normalizeIngredientName(name: string): string {
@@ -69,14 +78,16 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Huevos': 'proteinas',
   'Pollo o tofu': 'proteinas',
   'Pechuga de pollo sin piel': 'proteinas',
+  'Atun al natural': 'proteinas',
+  'Bondiola': 'proteinas',
 
   // Verduras y Hortalizas
   'Zucchini': 'verduras',
-  'Morron rojo': 'verduras',
-  'Morron verde': 'verduras',
+  'Morrón rojo': 'verduras',
+  'Morrón verde': 'verduras',
   'Cebolla': 'verduras',
   'Brotes de soja': 'verduras',
-  'Cebolla morada': 'verduras',
+  'Cebolla colorada': 'verduras',
   'Tomate': 'verduras',
   'Rucula': 'verduras',
   'Tomates cherry': 'verduras',
@@ -95,7 +106,10 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Tomate troceado en conserva': 'verduras',
   'Zucchini rallado': 'verduras',
   'Cebolla roja': 'verduras',
-  'Boniato cocido': 'verduras',
+  'Boniato': 'verduras',
+  'Lechuga': 'verduras',
+  'Champiñones': 'verduras',
+  'Salsa de tomate': 'verduras',
 
   // Frutas
   'Palta': 'frutas',
@@ -117,6 +131,7 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Mantequilla': 'lacteos',
   'Queso rallado': 'lacteos',
   'Queso de bola': 'lacteos',
+  'Mozzarella light': 'lacteos',
   'Nata': 'lacteos',
 
   // Granos y Legumbres
@@ -127,6 +142,9 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Harina de avena': 'granos',
   'Harina de almendras': 'granos',
   'Harina': 'granos',
+  'Harina de garbanzo': 'granos',
+  'Lentejas': 'granos',
+  'Coco rallado': 'granos',
   'Semillas de chia': 'granos',
   'Almendras': 'granos',
   'Mani': 'granos',
@@ -151,7 +169,6 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Sal y pimienta': 'condimentos',
   'Sal': 'condimentos',
   'Sal gruesa': 'condimentos',
-  'Pizca de sal': 'condimentos',
   'Pimienta': 'condimentos',
   'Pimienta de Cayena': 'condimentos',
   'Aceto balsamico': 'condimentos',
@@ -163,7 +180,7 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   // Aceites y Grasas
   'Aceite de oliva': 'aceites',
   'Aceite de oliva virgen extra': 'aceites',
-  'Aceite de sesamo': 'aceites',
+  'Aceite de sesamo (opcional)': 'aceites',
   'Aceite de coco': 'aceites',
 
   // Endulzantes
@@ -172,10 +189,6 @@ const INGREDIENT_CATEGORY_MAP: Record<string, IngredientCategory> = {
   'Cacao amargo en polvo': 'endulzantes',
   'Cacao extra para rebozar': 'endulzantes',
   'Chips de chocolate amargo': 'endulzantes',
-
-  // Otros
-  'Agua': 'otros',
-  'Cubitos de hielo': 'otros',
 };
 
 export function getIngredientCategory(name: string): IngredientCategory {

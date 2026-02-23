@@ -8,25 +8,20 @@ interface ShoppingListItemProps {
   onToggle: () => void;
 }
 
+// Only show quantities useful for shopping (weight, volume, count)
+const SHOPPING_UNITS = new Set(['g', 'ml', 'kg', 'l', 'unidad', 'bandeja']);
+
+function isShoppingRelevant(q: { amount: number | null; unit: string | null; parseable: boolean }): boolean {
+  if (!q.parseable || q.amount === null || !q.unit) return false;
+  return SHOPPING_UNITS.has(q.unit);
+}
+
 function formatQuantity(q: { amount: number | null; unit: string | null; raw: string; parseable: boolean }): string {
-  if (!q.parseable) return q.raw;
-  if (q.amount === null) return q.raw;
-  // Format nicely: "3 unidad" → "3 unidades", but keep singular for 1
+  if (q.amount === null || !q.unit) return '';
   const displayAmount = Number.isInteger(q.amount) ? q.amount.toString() : q.amount.toString();
-  if (q.unit) {
-    // Pluralize common units
-    let displayUnit = q.unit;
-    if (q.amount > 1) {
-      if (q.unit === 'unidad') displayUnit = 'unidades';
-      else if (q.unit === 'diente') displayUnit = 'dientes';
-      else if (q.unit === 'cda') displayUnit = 'cdas';
-      else if (q.unit === 'cdita') displayUnit = 'cditas';
-      else if (q.unit === 'ramita') displayUnit = 'ramitas';
-      else if (q.unit === 'pellizco') displayUnit = 'pellizcos';
-    }
-    return `${displayAmount} ${displayUnit}`;
-  }
-  return displayAmount;
+  let displayUnit = q.unit;
+  if (q.amount > 1 && q.unit === 'unidad') displayUnit = 'unidades';
+  return `${displayAmount} ${displayUnit}`;
 }
 
 export const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
@@ -34,7 +29,8 @@ export const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
   checked,
   onToggle,
 }) => {
-  const hasMultipleUnits = item.quantities.filter((q) => q.parseable).length > 1;
+  const shoppingQuantities = item.quantities.filter(isShoppingRelevant);
+  const hasMultipleUnits = shoppingQuantities.length > 1;
 
   return (
     <div
@@ -63,8 +59,6 @@ export const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
             className={`text-sm ${
               checked
                 ? 'line-through text-theme-faint'
-                : item.isAGusto
-                ? 'italic text-theme-muted'
                 : 'text-theme-secondary'
             }`}
           >
@@ -72,24 +66,13 @@ export const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
           </span>
 
           {/* Single quantity — right aligned */}
-          {!hasMultipleUnits && !item.isAGusto && item.quantities.length > 0 && (
+          {!hasMultipleUnits && shoppingQuantities.length === 1 && (
             <span
               className={`text-sm tabular-nums flex-shrink-0 ${
                 checked ? 'line-through text-theme-faint' : 'text-theme-muted'
               }`}
             >
-              {formatQuantity(item.quantities[0])}
-            </span>
-          )}
-
-          {/* "a gusto" */}
-          {item.isAGusto && item.quantities.length > 0 && (
-            <span
-              className={`text-sm italic flex-shrink-0 ${
-                checked ? 'line-through text-theme-faint' : 'text-theme-muted'
-              }`}
-            >
-              {item.quantities[0].raw}
+              {formatQuantity(shoppingQuantities[0])}
             </span>
           )}
         </div>
@@ -97,7 +80,7 @@ export const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
         {/* Multiple units — show each on its own line */}
         {hasMultipleUnits && (
           <div className="mt-0.5 space-y-0.5">
-            {item.quantities.map((q, i) => (
+            {shoppingQuantities.map((q, i) => (
               <div
                 key={i}
                 className={`text-xs tabular-nums ${

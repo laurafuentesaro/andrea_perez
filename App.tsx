@@ -18,7 +18,7 @@ const AppContent: React.FC = () => {
               Estrategia Nutricional
             </h2>
             <p className="text-sm text-theme-secondary">
-              Plan semanal de 1,200 kcal para perdida de peso saludable
+              Plan semanal de 1,200 kcal
             </p>
           </div>
           <ViewToggle active={view} onChange={setView} />

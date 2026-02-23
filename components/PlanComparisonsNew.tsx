@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { DaySelector } from './DaySelector';
 import { CaloriesSummary } from './CaloriesSummary';
 import { MealTimeline } from './MealTimeline';
-import { ScheduleCard } from './ScheduleCard';
 import { WEEKLY_PLAN } from '../data/weeklyPlan';
 import { getRecipe } from '../data/recipes';
 import type { MealItemData } from './MealTimelineItem';
@@ -11,23 +10,6 @@ export const PlanComparisons: React.FC = () => {
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const currentPlan = WEEKLY_PLAN[selectedDayIndex];
 
-  const scheduleItems = [
-    {
-      time: 'Manana',
-      title: 'Desayuno Equilibrado',
-      description: 'Huevos + palta o shake proteico — 280-320 kcal',
-    },
-    {
-      time: 'Mediodia',
-      title: 'Almuerzo + Postre',
-      description: 'Plato principal con receta + postre pre-porcionado',
-    },
-    {
-      time: 'Noche',
-      title: 'Cena Ligera + Postre',
-      description: 'Porcion controlada + postre de chocolate o chia',
-    },
-  ];
 
   const buildMealItem = (
     label: string,
@@ -61,6 +43,9 @@ export const PlanComparisons: React.FC = () => {
       meal: buildMealItem('Almuerzo', currentPlan.meals.lunch),
       dessert: buildDessertItem(currentPlan.meals.dessertLunch),
     },
+    ...(currentPlan.meals.snack ? [{
+      meal: buildMealItem('Merienda', currentPlan.meals.snack),
+    }] : []),
     {
       meal: buildMealItem('Cena', currentPlan.meals.dinner),
       dessert: buildDessertItem(currentPlan.meals.dessertDinner),
@@ -69,8 +54,6 @@ export const PlanComparisons: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <ScheduleCard items={scheduleItems} />
-
       <div className="bg-theme-card border border-theme-border rounded-lg overflow-hidden transition-colors">
         <DaySelector
           days={WEEKLY_PLAN.map(p => p.day)}

@@ -178,14 +178,14 @@ export function collectWeeklyRecipes(plan: DayPlan[]): RecipeNeed[] {
   // Track which (recipeId, dayIndex) combos are already covered by a batch cook
   const coveredByBatch = new Set<string>();
 
-  const mealSlots = ['breakfast', 'lunch', 'dessertLunch', 'dinner', 'dessertDinner'] as const;
+  const mealSlots = ['breakfast', 'lunch', 'dessertLunch', 'dinner', 'dessertDinner', 'snack'] as const;
 
   for (let dayIndex = 0; dayIndex < plan.length; dayIndex++) {
     const day = plan[dayIndex];
 
     for (const slot of mealSlots) {
-      const meal = day.meals[slot];
-      if (!meal.recipeId) continue;
+      const meal = day.meals[slot as keyof typeof day.meals];
+      if (!meal || !meal.recipeId) continue;
 
       // Process main recipe and side recipe
       const recipeIds = [meal.recipeId];
