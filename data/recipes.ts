@@ -1,7 +1,7 @@
 export interface RecipeData {
   id: string;
   name: string;
-  source: 'obsidian' | 'manual';
+  source: 'obsidian' | 'cookidoo' | 'manual';
   sourceUrl?: string;
   cookTime: number;       // minutes
   servings: number;

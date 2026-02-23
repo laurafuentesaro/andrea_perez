@@ -58,7 +58,7 @@ export const ShoppingListCategory: React.FC<ShoppingListCategoryProps> = ({
         </span>
         <ChevronRight
           size={14}
-          className={`text-theme-muted transition-transform duration-200 ${
+          className={`text-theme-muted transition-transform duration-200 motion-reduce:transition-none ${
             expanded ? 'rotate-90' : ''
           }`}
         />
@@ -69,7 +69,7 @@ export const ShoppingListCategory: React.FC<ShoppingListCategoryProps> = ({
 
       {/* Expandable items */}
       <div
-        className="overflow-hidden transition-all duration-300 ease-in-out"
+        className="overflow-hidden transition-all duration-200 ease-out motion-reduce:transition-none"
         style={{
           display: 'grid',
           gridTemplateRows: expanded ? '1fr' : '0fr',

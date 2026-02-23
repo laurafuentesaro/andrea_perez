@@ -2,28 +2,32 @@ import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import { computeShoppingList } from '../data/shoppingList';
 import { CATEGORY_ORDER } from '../data/ingredientCategories';
 import { ShoppingListCategory } from './ShoppingListCategory';
+import type { PlanConfig } from '../data/plans';
 
-const STORAGE_KEY = 'shopping-list-checked';
+interface ShoppingListProps {
+  plan: PlanConfig;
+}
 
-function loadChecked(): Set<string> {
+function loadChecked(storageKey: string): Set<string> {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(storageKey);
     if (stored) return new Set(JSON.parse(stored));
   } catch {}
   return new Set();
 }
 
-function saveChecked(checked: Set<string>) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(checked)));
+function saveChecked(storageKey: string, checked: Set<string>) {
+  localStorage.setItem(storageKey, JSON.stringify(Array.from(checked)));
 }
 
-export const ShoppingList: React.FC = () => {
-  const data = useMemo(() => computeShoppingList(), []);
-  const [checkedItems, setCheckedItems] = useState<Set<string>>(() => loadChecked());
+export const ShoppingList: React.FC<ShoppingListProps> = ({ plan }) => {
+  const storageKey = `shopping-list-checked-${plan.id}`;
+  const data = useMemo(() => computeShoppingList(plan.days, plan.recipes), [plan]);
+  const [checkedItems, setCheckedItems] = useState<Set<string>>(() => loadChecked(storageKey));
 
   useEffect(() => {
-    saveChecked(checkedItems);
-  }, [checkedItems]);
+    saveChecked(storageKey, checkedItems);
+  }, [checkedItems, storageKey]);
 
   const toggleItem = useCallback((id: string) => {
     setCheckedItems((prev) => {
@@ -72,7 +76,7 @@ export const ShoppingList: React.FC = () => {
         {/* Progress bar */}
         <div className="h-1.5 bg-theme-border rounded-full overflow-hidden">
           <div
-            className="h-full bg-theme-accent rounded-full transition-all duration-300"
+            className="h-full bg-theme-accent rounded-full transition-[width] duration-200 ease-out motion-reduce:transition-none"
             style={{ width: `${progressPercent}%` }}
           />
         </div>

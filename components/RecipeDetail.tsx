@@ -69,14 +69,14 @@ export const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
       >
         <ChevronDown
           size={14}
-          className={`transition-transform duration-200 ${showSteps ? 'rotate-180' : ''}`}
+          className={`transition-transform duration-200 motion-reduce:transition-none ${showSteps ? 'rotate-180' : ''}`}
         />
         {showSteps ? 'Ocultar pasos' : 'Ver pasos'}
       </button>
 
       {/* Instructions */}
       <div
-        className="overflow-hidden transition-all duration-300 ease-in-out"
+        className="overflow-hidden transition-all duration-200 ease-out motion-reduce:transition-none"
         style={{
           display: 'grid',
           gridTemplateRows: showSteps ? '1fr' : '0fr',

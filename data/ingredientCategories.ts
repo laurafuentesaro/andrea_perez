@@ -63,6 +63,7 @@ const NAME_NORMALIZATIONS: Record<string, string> = {
   'Morron verde': 'Morrón verde',
   'Champinones': 'Champiñones',
   'Pizca de sal': 'Sal',
+  'Aceite de sesamo': 'Aceite de sesamo (opcional)',
 };
 
 export function normalizeIngredientName(name: string): string {

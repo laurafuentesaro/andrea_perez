@@ -52,7 +52,7 @@ export const MealTimelineItem: React.FC<MealTimelineItemProps> = ({
               {hasRecipe && (
                 <ChevronRight
                   size={14}
-                  className={`text-theme-muted transition-transform duration-200 ${
+                  className={`text-theme-muted transition-transform duration-200 motion-reduce:transition-none ${
                     isExpanded ? 'rotate-90' : ''
                   }`}
                 />
@@ -73,7 +73,7 @@ export const MealTimelineItem: React.FC<MealTimelineItemProps> = ({
         {/* Expanded recipe detail */}
         {meal.recipe && (
           <div
-            className="overflow-hidden transition-all duration-300 ease-in-out"
+            className="overflow-hidden transition-all duration-200 ease-out motion-reduce:transition-none"
             style={{
               display: 'grid',
               gridTemplateRows: isExpanded ? '1fr' : '0fr',
@@ -115,7 +115,7 @@ export const MealTimelineItem: React.FC<MealTimelineItemProps> = ({
                 {hasDessertRecipe && (
                   <ChevronRight
                     size={12}
-                    className={`text-theme-muted transition-transform duration-200 ${
+                    className={`text-theme-muted transition-transform duration-200 motion-reduce:transition-none ${
                       dessertExpanded ? 'rotate-90' : ''
                     }`}
                   />
@@ -136,7 +136,7 @@ export const MealTimelineItem: React.FC<MealTimelineItemProps> = ({
           {/* Expanded dessert recipe detail */}
           {dessert.recipe && (
             <div
-              className="overflow-hidden transition-all duration-300 ease-in-out"
+              className="overflow-hidden transition-all duration-200 ease-out motion-reduce:transition-none"
               style={{
                 display: 'grid',
                 gridTemplateRows: dessertExpanded ? '1fr' : '0fr',

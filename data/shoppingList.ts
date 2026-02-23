@@ -1,5 +1,5 @@
-import { RECIPES, type RecipeData } from './recipes';
-import { WEEKLY_PLAN, type DayPlan } from './weeklyPlan';
+import { type RecipeData } from './recipes';
+import { type DayPlan } from './weeklyPlan';
 import {
   normalizeIngredientName,
   getIngredientCategory,
@@ -173,7 +173,7 @@ export interface RecipeNeed {
   isBatchCook: boolean;
 }
 
-export function collectWeeklyRecipes(plan: DayPlan[]): RecipeNeed[] {
+export function collectWeeklyRecipes(plan: DayPlan[], recipes: Record<string, RecipeData>): RecipeNeed[] {
   const needs = new Map<string, RecipeNeed>();
   // Track which (recipeId, dayIndex) combos are already covered by a batch cook
   const coveredByBatch = new Set<string>();
@@ -195,7 +195,7 @@ export function collectWeeklyRecipes(plan: DayPlan[]): RecipeNeed[] {
         const key = `${recipeId}:${dayIndex}`;
         if (coveredByBatch.has(key)) continue;
 
-        const recipe = RECIPES[recipeId];
+        const recipe = recipes[recipeId];
         if (!recipe) continue;
 
         const existing = needs.get(recipeId);
@@ -325,10 +325,10 @@ export function aggregateIngredients(needs: RecipeNeed[]): AggregatedIngredient[
   return result;
 }
 
-// ─── Convenience: compute full shopping list from global data ──────────
+// ─── Convenience: compute full shopping list ──────────────────────────
 
-export function computeShoppingList() {
-  const recipeNeeds = collectWeeklyRecipes(WEEKLY_PLAN);
+export function computeShoppingList(plan: DayPlan[], recipes: Record<string, RecipeData>) {
+  const recipeNeeds = collectWeeklyRecipes(plan, recipes);
   const ingredients = aggregateIngredients(recipeNeeds);
 
   // Group by category

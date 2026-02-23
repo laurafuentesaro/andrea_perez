@@ -19,7 +19,7 @@ export const DaySelector: React.FC<DaySelectorProps> = ({
             key={day}
             onClick={() => onSelect(idx)}
             className={`
-              relative px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap
+              relative px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap active:scale-[0.97] motion-reduce:transition-none
               ${selectedIndex === idx
                 ? 'text-theme-text'
                 : 'text-theme-muted hover:text-theme-secondary'
