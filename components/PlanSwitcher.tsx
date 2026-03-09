@@ -6,7 +6,7 @@ interface PlanSwitcherProps {
   onChange: (id: PlanId) => void;
 }
 
-const planIds: PlanId[] = ['plan1', 'plan2'];
+const planIds: PlanId[] = ['plan1', 'plan2', 'plan3'];
 
 export const PlanSwitcher: React.FC<PlanSwitcherProps> = ({ active, onChange }) => {
   return (

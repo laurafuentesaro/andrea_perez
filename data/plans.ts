@@ -4,8 +4,10 @@ import { WEEKLY_PLAN } from './weeklyPlan';
 import { RECIPES } from './recipes';
 import { WEEKLY_PLAN_V1 } from './weeklyPlanV1';
 import { RECIPES_V1 } from './recipesV1';
+import { WEEKLY_PLAN_V3 } from './weeklyPlanV3';
+import { RECIPES_V3 } from './recipesV3';
 
-export type PlanId = 'plan1' | 'plan2';
+export type PlanId = 'plan1' | 'plan2' | 'plan3';
 
 export interface PlanConfig {
   id: PlanId;
@@ -29,5 +31,12 @@ export const PLANS: Record<PlanId, PlanConfig> = {
     description: 'Plan actualizado',
     days: WEEKLY_PLAN,
     recipes: RECIPES,
+  },
+  plan3: {
+    id: 'plan3',
+    label: 'Plan 3',
+    description: 'Plan 3',
+    days: WEEKLY_PLAN_V3,
+    recipes: RECIPES_V3,
   },
 };
