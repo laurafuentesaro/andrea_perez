@@ -39,20 +39,23 @@ export const PlanComparisons: React.FC<PlanComparisonsProps> = ({ plan }) => {
     isDessert: true,
   });
 
+  const hasDessert = (slot: { description: string; kcal: number }) =>
+    slot.kcal > 0 || slot.description.length > 0;
+
   const mealGroups = [
     {
       meal: buildMealItem('Desayuno', currentPlan.meals.breakfast),
     },
     {
       meal: buildMealItem('Almuerzo', currentPlan.meals.lunch),
-      dessert: buildDessertItem(currentPlan.meals.dessertLunch),
+      ...(hasDessert(currentPlan.meals.dessertLunch) ? { dessert: buildDessertItem(currentPlan.meals.dessertLunch) } : {}),
     },
     ...(currentPlan.meals.snack ? [{
       meal: buildMealItem('Merienda', currentPlan.meals.snack),
     }] : []),
     {
       meal: buildMealItem('Cena', currentPlan.meals.dinner),
-      dessert: buildDessertItem(currentPlan.meals.dessertDinner),
+      ...(hasDessert(currentPlan.meals.dessertDinner) ? { dessert: buildDessertItem(currentPlan.meals.dessertDinner) } : {}),
     },
   ];
 

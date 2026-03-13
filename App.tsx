@@ -10,7 +10,7 @@ import { PLANS, type PlanId } from './data/plans';
 
 const AppContent: React.FC = () => {
   const [view, setView] = useState<ViewMode>('plan');
-  const [activePlanId, setActivePlanId] = useState<PlanId>('plan3');
+  const [activePlanId, setActivePlanId] = useState<PlanId>('plan4');
 
   const activePlan = PLANS[activePlanId];
 
